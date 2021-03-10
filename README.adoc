@@ -1,4 +1,4 @@
-= Drag markers in an applicaiton using MapView
+= Drag markers in an application using MapView
 
 This application is a small demo of how to implement dragging of markers in a MapView.
 
