@@ -1,0 +1,43 @@
+= Drag markers in an applicaiton using MapView
+
+This application is a small demo of how to implement dragging of markers in a MapView.
+
+== No Drag'n Drop
+
+As MapView is basically a web browser running a webpage with an OpenLayers Javascript content, the normal drag and 
+drop cannot be used, as this is used by OpenLayers for panning the map.
+
+So we need a different mechanism to start and end the dragging of a marker in MapView. I have for this demo 
+implemented 2 variants. Both start a drag with a double-click on a marker, and both abort the drag when the `ESC` key
+is pressed. Finishing the drag is different.
+
+The application can be started by running 
+[source,shell]
+----
+./gradlew run
+----
+
+The application shows a window with two parts, both showing a map of Paris with 3 markers that might mark places to 
+visit.
+
+== Variant 1, left side
+
+Dragging a marker is initialized by double-clicking on it. The marker then follows the mouse. Hitting `ESC` will 
+abort the drag, and the marker will return to it's original position.
+
+To finish a drag, a right click must be made on the map, the dragged marker then will stay at the position it was 
+dragged to.
+
+NOTE: A left click is not recognized here, this might be a problem with the offset of the marker and it's label so 
+that the mouse lies exactly on the border of the image and this seems to prevent the event recognition in Javascript.
+I had no time to investigate this further. 
+
+== Variant 2 , right side
+
+Dragging a merker is started as well by double clicking. The clicked marker stays where it is, but an additional 
+marker in form of a target symbol is displayed and is following the mouse. Again, `ESC` will abort the drag. In this 
+implementation a single left click will end the drag, hide the target symbol and move the marker that was double 
+clicked to the new position.
+
+NOTE: In contrast to variant 1, here the dragged image lies centered below the mouse pointer and a left click on 
+this marker is recognized.
