@@ -29,7 +29,7 @@ public class MapPaneDragTarget extends MapPane {
     @Override
     protected List<Marker> setupMarkers() {
         var markers = super.setupMarkers();
-        targetMarker = new Marker(getClass().getResource("/target.png" ), -32, -32)
+        targetMarker = new Marker(getClass().getResource("/target.png"), -32, -32)
             .setPosition(new Coordinate(0.0, 0.0)).setVisible(false);
         markers.add(targetMarker);
         return markers;
@@ -75,16 +75,5 @@ public class MapPaneDragTarget extends MapPane {
                 animateMarker(startMarker, startMarker.getPosition(), event.getMarker().getPosition().normalize());
             }
         });
-
-        mapView.addEventHandler(MapViewEvent.MAP_RIGHTCLICKED, event -> {
-            event.consume();
-            if (draggedMarker != null) {
-                LOGGER.info("right click detected, finishing drag");
-                targetMarker.setVisible(false);
-                draggedMarker = null;
-                animateMarker(startMarker, startMarker.getPosition(), event.getCoordinate().normalize());
-            }
-        });
     }
-
 }
